@@ -1,0 +1,63 @@
+[
+  {
+    "id": "lead-1791208106823",
+    "name": "Arshad Ahamed Sheikh",
+    "phone": "9201112191",
+    "email": "umerdelight@gmail.com",
+    "bill": "2400",
+    "kw": "3.0",
+    "city": "Khargone",
+    "notes": "Site survey scheduled for Saturday 11am in Khargone",
+    "provider": "google",
+    "updatedAt": "2026-10-06T12:23:51.103Z",
+    "createdAt": "2026-10-05T13:48:26.823Z",
+    "status": "Site Survey Scheduled",
+    "panelPreference": "Undecided",
+    "adminNotes": "",
+    "quotedPrice": "185000",
+    "surveyDate": "",
+    "followUpDate": ""
+  },
+  {
+    "id": "lead-1791207378403",
+    "name": "Sunil Sharma",
+    "phone": "9827098765",
+    "email": "sunil@gmail.com",
+    "bill": "2400",
+    "kw": "2.5",
+    "city": "Khargone",
+    "notes": "",
+    "provider": "direct",
+    "updatedAt": "2026-10-05T13:36:18.404Z",
+    "createdAt": "2026-10-05T13:36:18.404Z"
+  },
+  {
+    "id": "lead-1",
+    "name": "Rameshwar Patidar",
+    "phone": "9826011223",
+    "email": "ramesh.patidar@gmail.com",
+    "bill": "3500",
+    "kw": "3.6",
+    "city": "Khargone",
+    "notes": "Interested in 3kW TOPCon panels for home",
+    "createdAt": "2026-10-05T08:35:56.714Z",
+    "status": "Site Survey Scheduled",
+    "panelPreference": "Waaree N-Type TOPCon",
+    "adminNotes": "RCC roof 500 sq ft, MPPKVVCL file initiated",
+    "quotedPrice": "165000",
+    "surveyDate": "2026-10-10",
+    "followUpDate": "",
+    "updatedAt": "2026-10-05T17:23:41.491Z"
+  },
+  {
+    "id": "lead-2",
+    "name": "Mohammad Imran Khan",
+    "phone": "9754823190",
+    "email": "imran.k@yahoo.com",
+    "bill": "2200",
+    "kw": "2.3",
+    "city": "Gogawan, Khargone",
+    "notes": "PM Surya Ghar subsidy inquiry",
+    "createdAt": "2026-10-04T15:35:56.714Z"
+  }
+]

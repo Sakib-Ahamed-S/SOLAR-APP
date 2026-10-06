@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 270" width="100%" height="100%">
+  <!-- Delight Electricals Official Emblem Logo (Asset 4.png / public.svg) -->
+  
+  <!-- Outer Dark Navy Blue Oval Ring -->
+  <ellipse cx="150" cy="135" rx="144" ry="128" fill="none" stroke="#1d2359" stroke-width="14" />
+  
+  <!-- Crisp White Ring Gap -->
+  <ellipse cx="150" cy="135" rx="135" ry="119" fill="none" stroke="#ffffff" stroke-width="6" />
+
+  <!-- Inner Emerald Green Oval Ring -->
+  <ellipse cx="150" cy="135" rx="128" ry="112" fill="none" stroke="#0e7e3b" stroke-width="9" />
+  
+  <!-- Inner White Canvas -->
+  <ellipse cx="150" cy="135" rx="122" ry="106" fill="#ffffff" />
+
+  <!-- Stylized Italic Bold Navy Blue 'D' with Central Notch -->
+  <path d="M 82 80
+           C 82 72 88 72 98 72
+           L 138 72
+           C 168 72 188 92 188 122
+           C 188 152 168 188 134 188
+           L 84 188
+           C 78 188 78 182 80 176
+           L 95 108
+           C 97 101 103 100 108 102
+           C 116 104 126 114 135 114
+           C 138 114 139 110 136 106
+           C 130 98 120 92 108 92
+           C 102 92 98 88 100 82
+           Z
+           M 108 165
+           L 130 165
+           C 152 165 163 134 163 118
+           C 163 100 148 94 131 94
+           L 119 94
+           Z" 
+        fill="#1d2359" 
+        fill-rule="evenodd" />
+
+  <!-- Emerald Green Oval Dot for 'i' -->
+  <ellipse cx="212" cy="74" rx="12" ry="7.5" fill="#0e7e3b" transform="rotate(-12 212 74)" />
+
+  <!-- Emerald Green Stem for 'i' with Distinct Curving Foot -->
+  <path d="M 194 92
+           C 190 92 185 96 183 100
+           C 181 105 181 114 180 122
+           L 178 148
+           C 178 166 185 188 212 188
+           C 230 188 242 180 242 174
+           C 242 170 236 168 229 169
+           C 218 171 210 165 208 152
+           L 211 100
+           C 211 94 204 92 194 92
+           Z" 
+        fill="#0e7e3b" />
+</svg>

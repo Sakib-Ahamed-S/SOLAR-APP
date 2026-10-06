@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delight Electricals | Arshad Ahamed Sheikh</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #1e3a8a; --secondary: #15803d; }
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; color: #1f2937; overflow-x: hidden; }
+        .urdu { font-family: 'Noto Nastaliq Urdu', serif; line-height: 2.8; text-align: right; }
+        .hindi { font-family: 'Noto Sans Devanagari', sans-serif; }
+        
+        /* Animations */
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        .slide-up { animation: slideUp 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
+        
+        .active-nav { color: #1e3a8a !important; border-top: 3px solid #1e3a8a; }
+    </style>
+</head>
+<body class="pb-24">
+
+    <!-- Header -->
+    <header class="glass sticky top-0 z-50 px-4 py-3 border-b border-gray-200 fade-in">
+        <div class="max-w-md mx-auto flex flex-col items-center">
+            <div class="flex items-center space-x-2 mb-2">
+                <span class="text-3xl">☀️</span>
+                <span class="text-xl font-black text-blue-900 tracking-wider">DELIGHT ELECTRICALS</span>
+            </div>
+            <div class="flex space-x-2 bg-gray-100 p-1 rounded-full w-full justify-around">
+                <button onclick="setLanguage('en')" id="l-en" class="text-xs font-bold px-4 py-1.5 rounded-full transition-all">English</button>
+                <button onclick="setLanguage('hi')" id="l-hi" class="text-xs font-bold px-4 py-1.5 rounded-full transition-all">हिंदी</button>
+                <button onclick="setLanguage('ur')" id="l-ur" class="text-xs font-bold px-4 py-1.5 rounded-full transition-all">اردو</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-md mx-auto px-5 py-6">
+
+        <!-- HOME SECTION -->
+        <section id="home" class="tab-content active slide-up">
+            <div class="mb-8">
+                <h1 id="welcome-title" class="text-2xl font-bold text-blue-900 leading-tight"></h1>
+                <p class="text-blue-700 font-semibold mt-1" id="full-name-head"></p>
+            </div>
+
+            <!-- Vendor Quality Guide -->
+            <div class="bg-white rounded-2xl p-6 card-shadow mb-6 border-l-4 border-yellow-500">
+                <h3 id="guide-title" class="font-bold text-lg mb-3 border-b pb-2"></h3>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-3">
+                        <span class="text-red-500 text-xl font-bold">☒</span>
+                        <p id="avoid-text" class="text-sm text-gray-600 leading-relaxed"></p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="text-green-600 text-xl font-bold">☑</span>
+                        <p id="choose-text" class="text-sm text-gray-800 font-medium leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div onclick="showModal('waaree')" class="bg-white p-5 rounded-2xl text-center cursor-pointer border border-blue-100 hover:bg-blue-50 transition-colors shadow-sm">
+                    <h4 class="font-bold text-blue-900">WAAREE</h4>
+                    <span class="text-[10px] text-blue-500 font-bold uppercase tracking-widest" id="tap-info-1">Details</span>
+                </div>
+                <div onclick="showModal('havells')" class="bg-white p-5 rounded-2xl text-center cursor-pointer border border-green-100 hover:bg-green-50 transition-colors shadow-sm">
+                    <h4 class="font-bold text-green-800">HAVELLS</h4>
+                    <span class="text-[10px] text-green-500 font-bold uppercase tracking-widest" id="tap-info-2">Details</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEARN SECTION -->
+        <section id="learn" class="tab-content slide-up">
+            <h2 id="tech-header" class="text-xl font-bold mb-6 text-blue-900"></h2>
+            <div class="bg-white rounded-2xl overflow-hidden card-shadow mb-4">
+                <table class="w-full text-sm text-left">
+                    <thead class="bg-blue-900 text-white font-bold">
+                        <tr>
+                            <th class="p-4" id="th-f">Feature</th>
+                            <th class="p-4" id="th-m">Mono</th>
+                            <th class="p-4 bg-blue-800" id="th-t">TOPCon</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tech-table-body" class="divide-y divide-gray-100"></tbody>
+                </table>
+            </div>
+            <p id="tech-summary" class="text-xs text-gray-500 p-2 italic leading-relaxed"></p>
+        </section>
+
+        <!-- CALCULATOR SECTION -->
+        <section id="calc" class="tab-content slide-up">
+            <div class="bg-white p-8 rounded-2xl card-shadow">
+                <h2 id="calc-h" class="text-xl font-bold mb-4 text-blue-900"></h2>
+                <div class="mb-6">
+                    <label id="bill-label" class="block text-sm font-bold text-gray-500 mb-2 uppercase tracking-wide"></label>
+                    <input type="number" id="billInput" class="w-full bg-gray-50 border-2 border-gray-100 p-4 rounded-xl focus:border-blue-600 outline-none transition-all text-xl font-bold" placeholder="0">
+                </div>
+                <button onclick="calculate()" class="w-full bg-blue-900 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-blue-800 transition-all uppercase">Calculate</button>
+
+                <div id="result" class="mt-8 hidden bg-green-50 p-6 rounded-xl border border-green-100">
+                    <div class="flex justify-between mb-2">
+                        <span id="res-kw" class="text-gray-600 font-medium"></span>
+                        <span id="res-kw-val" class="font-bold text-blue-900 text-xl"></span>
+                    </div>
+                    <div class="flex justify-between mb-4">
+                        <span id="res-sv" class="text-gray-600 font-medium"></span>
+                        <span id="res-sv-val" class="font-bold text-green-700 text-xl"></span>
+                    </div>
+                    <p id="calc-note" class="text-[10px] text-red-500 border-t pt-2 italic"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="contact" class="tab-content slide-up">
+            <div class="bg-white p-8 rounded-3xl card-shadow text-center">
+                <h2 class="text-2xl font-bold text-blue-900">Delight Electricals</h2>
+                <p id="full-name-about" class="text-blue-600 font-semibold mb-8"></p>
+                
+                <div class="space-y-4 mb-8">
+                    <a href="tel:9479452486" class="flex items-center justify-center gap-3 bg-green-600 text-white py-4 rounded-2xl font-bold shadow-lg">
+                        <span>📞</span> <span id="call-btn-text"></span>
+                    </a>
+                </div>
+
+                <a href="https://share.google/NNyjdFnoARXirRbOt" target="_blank" class="block text-gray-700 hover:text-blue-700 transition-colors group">
+                    <div class="bg-gray-50 p-6 rounded-2xl border-2 border-dashed border-gray-200 group-hover:border-blue-300">
+                        <h4 class="font-bold text-sm mb-2 uppercase tracking-widest text-gray-400" id="addr-h"></h4>
+                        <p class="text-base font-semibold leading-relaxed">
+                            26, Tilak Path,<br>
+                            Near Mohan Talkies, Khargone.<br>
+                            Madhya Pradesh
+                        </p>
+                        <p class="text-blue-500 text-xs mt-3 underline font-bold">Open in Google Maps</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal -->
+    <div id="brandModal" class="fixed inset-0 bg-black/60 hidden z-[100] items-center justify-center p-6 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl w-full max-w-sm p-8 relative slide-up">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 text-2xl">&times;</button>
+            <h3 id="modalTitle" class="text-xl font-bold text-blue-900 mb-4"></h3>
+            <p id="modalDesc" class="text-gray-600 text-sm leading-relaxed mb-6"></p>
+            <a href="https://wa.me/919479452486" target="_blank" class="block text-center bg-green-600 text-white py-3 rounded-xl font-bold text-sm">Inquire on WhatsApp</a>
+        </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <nav class="fixed bottom-0 w-full glass border-t border-gray-200 flex justify-around py-2 max-w-md left-1/2 -translate-x-1/2">
+        <button onclick="showTab('home', this)" class="nav-item flex flex-col items-center p-2 text-blue-900 active-nav">
+            <span class="text-xl">🏠</span><span class="text-[9px] font-bold" id="n-h"></span>
+        </button>
+        <button onclick="showTab('learn', this)" class="nav-item flex flex-col items-center p-2 text-gray-400">
+            <span class="text-xl">📖</span><span class="text-[9px] font-bold" id="n-l"></span>
+        </button>
+        <button onclick="showTab('calc', this)" class="nav-item flex flex-col items-center p-2 text-gray-400">
+            <span class="text-xl">📊</span><span class="text-[9px] font-bold" id="n-c"></span>
+        </button>
+        <button onclick="showTab('contact', this)" class="nav-item flex flex-col items-center p-2 text-gray-400">
+            <span class="text-xl">👤</span><span class="text-[9px] font-bold" id="n-a"></span>
+        </button>
+    </nav>
+
+    <script>
+        const content = {
+            en: {
+                name: "Arshad Ahamed Sheikh",
+                welcome: "Expert Solar Solutions",
+                guide_t: "Vendor Choice Guide",
+                avoid: "Avoid local vendors who use low-grade wiring and poor mounting to reduce costs. This leads to system failure and electrical hazards.",
+                choose: "We provide high-quality insulation, professional wiring, and premium Tier-1 components to ensure your system lasts 25+ years.",
+                waaree_t: "Waaree Solar",
+                waaree_d: "As a premier Indian brand, Waaree modules are built for the harsh Khargone heat, offering the best performance warranty in the industry.",
+                havells_t: "Havells Inverters",
+                havells_d: "We trust Havells for their superior build quality and the fastest on-site service network in Madhya Pradesh.",
+                tech_h: "Solar Technology",
+                tech_rows: [["Efficiency", "19-21%", "22-24%"], ["Heat Rating", "Standard", "Excellent"], ["Service Life", "20 Years", "25+ Years"]],
+                tech_s: "While Mono is popular, TOPCon technology generates more power during peak summers and low light conditions.",
+                calc_h: "Solar Savings",
+                bill_l: "Monthly Bill (₹)",
+                res_kw: "System Required:",
+                res_sv: "Estimated Savings:",
+                note: "Note: This is a standard estimate. Actual requirements may vary based on your connected load and roof space.",
+                call: "Call Arshad Ahamed Sheikh",
+                addr: "Office Location",
+                nav: ["HOME", "LEARN", "SAVINGS", "PROFILE"]
+            },
+            hi: {
+                name: "अरशद एहमद शेख",
+                welcome: "विशेषज्ञ सोलर समाधान",
+                guide_t: "वेंडर चयन गाइड",
+                avoid: "सस्ते के चक्कर में लोकल वायरिंग और घटिया फिटिंग करने वाले वेंडरों से बचें। इससे सिस्टम जल्दी खराब हो सकता है।",
+                choose: "हम सर्वोत्तम गुणवत्ता वाले इंसुलेशन, प्रोफेशनल वायरिंग और प्रीमियम घटकों का उपयोग करते हैं ताकि आपका सिस्टम 25+ वर्षों तक चले।",
+                waaree_t: "वारी (Waaree) सोलर",
+                waaree_d: "Waaree भारत का सबसे भरोसेमंद ब्रांड है। इनके पैनल खरगोन की तेज गर्मी में भी बेहतरीन काम करते हैं।",
+                havells_t: "हेवेल्स (Havells) इन्वर्टर",
+                havells_d: "हम Havells की सलाह देते हैं क्योंकि उनकी सर्विस मध्य प्रदेश में सबसे तेज और इन्वर्टर की क्वालिटी लाजवाब है।",
+                tech_h: "सोलर टेक्नोलॉजी",
+                tech_rows: [["क्षमता", "19-21%", "22-24%"], ["गर्मी में काम", "सामान्य", "शानदार"], ["जीवन काल", "20 वर्ष", "25+ वर्ष"]],
+                tech_s: "मोनो पैनल के मुकाबले TOPCon टेक्नोलॉजी गर्मियों और कम रोशनी में ज्यादा बिजली बनाती है।",
+                calc_h: "सोलर बचत कैलकुलेटर",
+                bill_l: "मासिक बिजली बिल (₹)",
+                res_kw: "आवश्यक सोलर सिस्टम:",
+                res_sv: "अनुमानित मासिक बचत:",
+                note: "नोट: यह एक मानक अनुमान है। वास्तविक आवश्यकता आपके लोड और जगह के अनुसार बदल सकती है।",
+                call: "कॉल करें: अरशद एहमद शेख",
+                addr: "कार्यालय का पता",
+                nav: ["होम", "सीखें", "बचत", "प्रोफाइल"]
+            },
+            ur: {
+                name: "ارشاد احمد شیخ",
+                welcome: "ماہر سولر سلوشنز",
+                guide_t: "وینڈر گائیڈ",
+                avoid: "سستے داموں کے لیے گھٹیا وائرنگ اور لوکل فٹنگ استعمال کرنے والے وینڈرز سے بچیں۔",
+                choose: "ہم بہترین کوالٹی کی وائرنگ اور بہتر سروس فراہم کرتے ہیں تاکہ آپ کا سسٹم 25 سال سے زائد چلے۔",
+                waaree_t: "واری (Waaree) سولر",
+                waaree_d: "واری ہندوستان کا بہترین برانڈ ہے جس کے پینلز کھرگون کی شدید گرمی برداشت کرنے کی صلاحیت رکھتے ہیں۔",
+                havells_t: "ہیویلز (Havells) انورٹر",
+                havells_d: "ہیویلز اپنی بہترین کوالٹی اور مدھیہ پردیش میں تیز ترین سروس کی وجہ سے جانا جاتا ہے۔",
+                tech_h: "سولر ٹیکنالوجی",
+                tech_rows: [["کارکردگی", "19-21%", "22-24%"], ["گرمی میں کام", "عام", "بہترین"], ["زندگی", "20 سال", "25+ سال"]],
+                tech_s: "ٹاپ کون (TOPCon) ٹیکنالوجی مونو کے مقابلے میں گرمیوں میں زیادہ بجلی بناتی ہے۔",
+                calc_h: "سولر بچت",
+                bill_l: "ماہانہ بل (₹)",
+                res_kw: "ضروری سسٹم:",
+                res_sv: "ماہانہ بچت:",
+                note: "نوٹ: یہ ایک تخمینہ ہے۔ اصل ضرورت لوڈ اور جگہ کے مطابق مختلف ہو سکتی ہے۔",
+                call: "کال: ارشاد احمد شیخ",
+                addr: "دفتر کا پتہ",
+                nav: ["ہوم", "معلومات", "بچت", "پروفائل"]
+            }
+        };
+
+        let currentL = 'en';
+
+        function setLanguage(lang) {
+            currentL = lang;
+            document.body.className = 'pb-24 ' + (lang === 'ur' ? 'urdu' : (lang === 'hi' ? 'hindi' : ''));
+            const d = content[lang];
+            
+            // Text injections
+            document.getElementById('full-name-head').innerText = d.name;
+            document.getElementById('full-name-about').innerText = d.name;
+            document.getElementById('welcome-title').innerText = d.welcome;
+            document.getElementById('guide-title').innerText = d.guide_t;
+            document.getElementById('avoid-text').innerText = d.avoid;
+            document.getElementById('choose-text').innerText = d.choose;
+            document.getElementById('tech-header').innerText = d.tech_h;
+            document.getElementById('tech-summary').innerText = d.tech_s;
+            document.getElementById('calc-h').innerText = d.calc_h;
+            document.getElementById('bill-label').innerText = d.bill_l;
+            document.getElementById('calc-note').innerText = d.note;
+            document.getElementById('call-btn-text').innerText = d.call;
+            document.getElementById('addr-h').innerText = d.addr;
+            
+            // Nav
+            document.getElementById('n-h').innerText = d.nav[0];
+            document.getElementById('n-l').innerText = d.nav[1];
+            document.getElementById('n-c').innerText = d.nav[2];
+            document.getElementById('n-a').innerText = d.nav[3];
+
+            // Table
+            let html = "";
+            d.tech_rows.forEach(r => html += `<tr><td class="p-4 font-semibold text-gray-500">${r[0]}</td><td class="p-4">${r[1]}</td><td class="p-4 font-bold text-blue-800">${r[2]}</td></tr>`);
+            document.getElementById('tech-table-body').innerHTML = html;
+
+            // Buttons Highlight
+            ['en','hi','ur'].forEach(l => document.getElementById('l-'+l).className = `text-xs font-bold px-4 py-1.5 rounded-full ${l===lang ? 'bg-blue-900 text-white shadow-lg' : 'text-gray-400'}`);
+        }
+
+        function showTab(id, el) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active-nav', 'text-blue-900'));
+            el.classList.add('active-nav');
+        }
+
+        function calculate() {
+            const bill = document.getElementById('billInput').value;
+            if(!bill || bill <= 0) return;
+            
+            // Industry Standard Logic: Avg rate ₹8/unit, Avg gen 120 units/kW
+            const unitsNeeded = bill / 8;
+            const kw = (unitsNeeded / 120).toFixed(1);
+            const savings = Math.round(bill * 0.9);
+
+            document.getElementById('result').classList.remove('hidden');
+            document.getElementById('res-kw').innerText = content[currentL].res_kw;
+            document.getElementById('res-sv').innerText = content[currentL].res_sv;
+            document.getElementById('res-kw-val').innerText = kw + " kW";
+            document.getElementById('res-sv-val').innerText = "₹" + savings;
+        }
+
+        function showModal(brand) {
+            document.getElementById('modalTitle').innerText = content[currentL][brand+'_t'];
+            document.getElementById('modalDesc').innerText = content[currentL][brand+'_d'];
+            document.getElementById('brandModal').classList.replace('hidden', 'flex');
+        }
+        function closeModal() { document.getElementById('brandModal').classList.replace('flex', 'hidden'); }
+
+        setLanguage('en');
+    </script>
+</body>
+</html>

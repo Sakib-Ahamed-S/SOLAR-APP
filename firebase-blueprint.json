@@ -1,0 +1,172 @@
+{
+  "entities": {
+    "Lead": {
+      "title": "Lead",
+      "description": "Customer solar inquiry and CRM lead record",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "phone": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "city": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "bill": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "kw": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "New Lead",
+            "Contacted",
+            "Site Survey Scheduled",
+            "Quotation Sent",
+            "Installation",
+            "Completed"
+          ],
+          "maxLength": 50
+        },
+        "panelPreference": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "adminNotes": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "quotedPrice": {
+          "type": "string",
+          "maxLength": 30
+        },
+        "surveyDate": {
+          "type": "string",
+          "maxLength": 30
+        },
+        "followUpDate": {
+          "type": "string",
+          "maxLength": 30
+        },
+        "provider": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "name",
+        "phone"
+      ]
+    },
+    "BusinessConfig": {
+      "title": "BusinessConfig",
+      "description": "System rates, PM Surya Ghar subsidy levels, and business information",
+      "type": "object",
+      "properties": {
+        "monoPerKwRate": {
+          "type": "number"
+        },
+        "topconPerKwRate": {
+          "type": "number"
+        },
+        "centralSubsidy1Kw": {
+          "type": "number"
+        },
+        "centralSubsidy2Kw": {
+          "type": "number"
+        },
+        "centralSubsidy3Kw": {
+          "type": "number"
+        },
+        "businessNotice": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "primaryPhone": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "secondaryPhone": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "address": {
+          "type": "string",
+          "maxLength": 200
+        }
+      }
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Authorized administrator record for role validation",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "phone": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "admin"
+          ],
+          "maxLength": 20
+        }
+      },
+      "required": [
+        "role"
+      ]
+    }
+  },
+  "firestore": {
+    "/leads/{leadId}": {
+      "schema": "Lead",
+      "description": "Collection of solar customer inquiries and CRM leads"
+    },
+    "/config/{configId}": {
+      "schema": "BusinessConfig",
+      "description": "Business pricing and system configurations"
+    },
+    "/admins/{adminId}": {
+      "schema": "Admin",
+      "description": "Trusted administrative users list for role-based access control"
+    }
+  }
+}

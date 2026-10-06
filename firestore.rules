@@ -1,0 +1,89 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net: default-deny all paths
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Hardened Global Helpers
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        (request.auth.token.email in ["arshaddelight@gmail.com", "sakibahamedsheikh91@gmail.com", "umerdelight@gmail.com"] && request.auth.token.email_verified == true) ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    // Lead Validation Helper (Enforces schema from firebase-blueprint.json)
+    function isValidLead(data) {
+      return data.keys().hasAll(['name', 'phone'])
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 100
+        && data.phone is string && data.phone.size() >= 10 && data.phone.size() <= 20
+        && (!('email' in data) || (data.email is string && data.email.size() <= 100))
+        && (!('city' in data) || (data.city is string && data.city.size() <= 100))
+        && (!('bill' in data) || (data.bill is string && data.bill.size() <= 20))
+        && (!('kw' in data) || (data.kw is string && data.kw.size() <= 20))
+        && (!('status' in data) || (data.status in ['New Lead', 'Contacted', 'Site Survey Scheduled', 'Quotation Sent', 'Installation', 'Completed']))
+        && (!('panelPreference' in data) || (data.panelPreference is string && data.panelPreference.size() <= 50))
+        && (!('notes' in data) || (data.notes is string && data.notes.size() <= 1000))
+        && (!('adminNotes' in data) || (data.adminNotes is string && data.adminNotes.size() <= 2000))
+        && (!('quotedPrice' in data) || (data.quotedPrice is string && data.quotedPrice.size() <= 30))
+        && (!('surveyDate' in data) || (data.surveyDate is string && data.surveyDate.size() <= 30))
+        && (!('followUpDate' in data) || (data.followUpDate is string && data.followUpDate.size() <= 30))
+        && (!('provider' in data) || (data.provider is string && data.provider.size() <= 50));
+    }
+
+    function isValidConfig(data) {
+      return (!('monoPerKwRate' in data) || data.monoPerKwRate is number)
+        && (!('topconPerKwRate' in data) || data.topconPerKwRate is number)
+        && (!('centralSubsidy1Kw' in data) || data.centralSubsidy1Kw is number)
+        && (!('centralSubsidy2Kw' in data) || data.centralSubsidy2Kw is number)
+        && (!('centralSubsidy3Kw' in data) || data.centralSubsidy3Kw is number)
+        && (!('businessNotice' in data) || (data.businessNotice is string && data.businessNotice.size() <= 500))
+        && (!('primaryPhone' in data) || (data.primaryPhone is string && data.primaryPhone.size() <= 20))
+        && (!('secondaryPhone' in data) || (data.secondaryPhone is string && data.secondaryPhone.size() <= 20))
+        && (!('address' in data) || (data.address is string && data.address.size() <= 200));
+    }
+
+    // Leads Collection: Public inquiry creation; Strictly Admin-only for read, update, list, delete
+    match /leads/{leadId} {
+      allow get: if isValidId(leadId) && isAdmin();
+      allow list: if isAdmin();
+      allow create: if isValidId(leadId) && isValidLead(incoming());
+      allow update: if isValidId(leadId) && isAdmin() && isValidLead(incoming());
+      allow delete: if isValidId(leadId) && isAdmin();
+    }
+
+    // Business Configuration Collection: Public read for solar rates; Admin-only write
+    match /config/{configId} {
+      allow get: if isValidId(configId);
+      allow list: if true;
+      allow create, update: if isValidId(configId) && isAdmin() && isValidConfig(incoming());
+      allow delete: if isValidId(configId) && isAdmin();
+    }
+
+    // Administrators Collection: Verification table for trusted roles
+    match /admins/{adminId} {
+      allow get: if isValidId(adminId) && isAdmin();
+      allow list: if isAdmin();
+      allow create, update, delete: if false;
+    }
+  }
+}

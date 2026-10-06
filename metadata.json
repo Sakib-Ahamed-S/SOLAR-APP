@@ -1,0 +1,8 @@
+{
+  "name": "Delight Electricals",
+  "description": "Delight Electricals by Arshad Ahamed Sheikh - Solar solutions, Waaree solar panels, Havells inverters, solar calculator and contact info in Khargone, MP.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
